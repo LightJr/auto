@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation d'achat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            border: 1px solid #e9ecef;
+        }
+        .header h1 {
+            color: #495057;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-top: none;
+        }
+        .section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+        .section h2 {
+            color: #495057;
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+        td {
+            background-color: #ffffff;
+            color: #333;
+        }
+        .total-row td {
+            font-weight: 600;
+            background-color: #495057;
+            color: #ffffff;
+        }
+        .footer {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 0 0 8px 8px;
+            border: 1px solid #e9ecef;
+            border-top: none;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .purchase-number {
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛒 Confirmation d'achat</h1>
+        <div class="purchase-number">#{{ purchase.purchase_number }}</div>
+    </div>
+    
+    <div class="content">
+        <p>Bonjour {{ purchase.first_name }},</p>
+        <p>Nous sommes ravis de confirmer votre achat de véhicule(s) avec AUTO REPUBLIC. Voici les détails de votre commande :</p>
+
+        <div class="section">
+            <h2>👤 Informations client</h2>
+            <table>
+                <tr>
+                    <th>Nom complet</th>
+                    <td>{{ purchase.first_name }} {{ purchase.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ purchase.email }}</td>
+                </tr>
+                <tr>
+                    <th>Téléphone</th>
+                    <td>{{ purchase.phone }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🚙 Véhicules achetés</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modèle</th>
+                        <th>Type</th>
+                        <th>Places</th>
+                        <th>Bagages</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase_vehicle in purchase.vehicles.all %}
+                    <tr>
+                        <td>{{ purchase_vehicle.vehicle.name }}</td>
+                        <td>{{ purchase_vehicle.vehicle.vehicle_type }}</td>
+                        <td>{{ purchase_vehicle.vehicle.seats }}</td>
+                        <td>{{ purchase_vehicle.vehicle.luggage }}</td>
+                        <td>{{ purchase_vehicle.price }}€</td>
+                        <td>{{ purchase_vehicle.quantity }}</td>
+                        <td>{% widthratio purchase_vehicle.price 1 purchase_vehicle.quantity %}€</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🚚 Détails de la livraison</h2>
+            <table>
+                <tr>
+                    <th>Date de livraison</th>
+                    <td>{{ purchase.delivery_date|date:"d/m/Y" }} à {{ purchase.delivery_time|time:"H:i" }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse de livraison</th>
+                    <td>{{ purchase.delivery_address }}</td>
+                </tr>
+                <tr>
+                    <th>Méthode de paiement</th>
+                    <td>{{ purchase.get_payment_method_display }}</td>
+                </tr>
+                <tr>
+                    <th>Date de commande</th>
+                    <td>{{ purchase.created_at|date:"d/m/Y" }} à {{ purchase.created_at|time:"H:i" }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💰 Résumé financier</h2>
+            <table>
+                <tr>
+                    <th>Nombre de véhicules</th>
+                    <td>{{ purchase.vehicles.count }} véhicule(s)</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Prix total</td>
+                    <td>{{ purchase.total_price }}€</td>
+                </tr>
+            </table>
+        </div>
+
+        <p>Nous vous remercions de votre confiance et vous souhaitons une excellente expérience avec AUTO REPUBLIC.</p>
+        <p>Cordialement,</p>
+        <p>L'équipe AUTO REPUBLIC</p>
+    </div>
+
+    <div class="footer">
+        <p><strong>AUTO REPUBLIC</strong> - Votre partenaire de confiance pour l'achat de véhicules.</p>
+        <p>Contact : junembuyi@gmail.com | +91 123 456 7890</p>
+    </div>
+</body>
+</html>

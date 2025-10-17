@@ -1,0 +1,50 @@
+# Fichiers Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Environnements virtuels
+venv/
+env/
+ENV/
+*.env
+*.venv
+
+# Config Django / SQLite
+db.sqlite3
+*.log
+*.pot
+
+# Migrations compilées
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/*.pyd
+
+# Cache / fichiers temporaires
+*.mo
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Static et media (si générés)
+staticfiles/
+media/
+
+# VS Code / PyCharm / IDE
+.vscode/
+.idea/
+*.iml
+
+# Tests
+.coverage
+.tox/
+pytest_cache/
+
+# OS files
+.DS_Store
+Thumbs.db

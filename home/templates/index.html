@@ -1,0 +1,899 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AUTO REPUBLIC RDC - Location et Vente de Véhicules de Luxe</title>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" >
+	<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" >
+	<link href="{% static 'css/global.css' %}" rel="stylesheet">
+	<link href="{% static 'css/index.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</head>
+<body>
+
+<!-- Loader global -->
+<div id="globalLoader" style="display: none !important; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); z-index: 9998; justify-content: center; align-items: center;">
+    <div class="card shadow-lg" style="background-color: white; padding: 30px; border-radius: 10px; text-align: center; max-width: 400px; z-index: 10000;">
+        <div class="spinner-border mb-3" role="status" style="width: 3rem; height: 3rem; border-color: #dc3545; border-right-color: transparent;">
+            <span class="visually-hidden">Chargement...</span>
+        </div>
+        <h5 class="text-dark mb-0" id="loaderMessage">Traitement en cours...</h5>
+    </div>
+</div>
+
+<!-- Container pour les notifications -->
+<div id="notificationContainer" style="position: fixed; top: 20px; right: 20px; z-index: 10000;"></div>
+
+<div class="main clearfix position-relative">
+ <div class="main_1 clearfix position-absolute top-0 w-100">
+   <section id="header">
+<nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky">
+  <div class="container-xl">
+    <a class="navbar-brand fs-3 p-0 fw-bold text-white" href="{% url 'index' %}"><i class="fa fa-car col_oran me-1 fs-2 align-middle"></i> AUTO <br> <span class="fs-5 span_1">REPUBLIC</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-0 ">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link" href="{% url 'models' %}">Vehicle Models </a>
+        </li>
+
+		<li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link" href="{% url 'garage' %}">Garage</a>
+        </li>
+      </ul>
+	  <ul class="navbar-nav mb-0 ms-auto">
+		<li class="nav-item">
+          <a class="nav-link button_2 ms-2 me-2" href="{% url 'contact' %}">Contact <i class="fa fa-check-circle ms-1"></i></a>
+        </li>
+		
+      </ul>
+    </div>
+  </div>
+</nav>
+</section>
+ </div>
+ <div class="main_2 clearfix">
+   <section id="center" class="center_home">
+ <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2" class="" aria-current="true"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/1.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+       <h5>Planifiez votre véhicule maintenant</h5>
+	   <h1 class="font_50 mt-4">Économisez gros grâce à <span class="col_oran">AUTO REPUBLIC</span> RDC <br> </h1>	
+	   <p class="mt-4 mb-4">Découvrez notre gamme complète de véhicules de luxe pour la location et l'achat en République Démocratique du Congo</p>
+	   <h6 class="d-inline-block me-2 mb-0"><a class="button" href="{% url 'models' %}">Réserver <i class="fa fa-check-circle ms-1"></i> </a></h6>
+	   <h6 class="d-inline-block mb-0"><a class="button_1" href="{% url 'about' %}">En savoir plus <i class="fa fa-check-circle ms-1"></i> </a></h6>	
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/2.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+       <h5>Planifiez votre voyage maintenant</h5>
+	   <h1 class="font_50 mt-4">Voyagez avec <span class="col_oran">style</span> et <br> confort</h1>	
+	   <p class="mt-4 mb-4">Profitez de nos véhicules haut de gamme pour tous vos déplacements en RDC</p>
+	   <h6 class="d-inline-block me-2 mb-0"><a class="button" href="{% url 'models' %}">Réserver <i class="fa fa-check-circle ms-1"></i> </a></h6>
+	   <h6 class="d-inline-block mb-0"><a class="button_1" href="{% url 'about' %}">En savoir plus <i class="fa fa-check-circle ms-1"></i> </a></h6>	
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/3.jpg' %}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+       <h5>Planifiez votre voyage maintenant</h5>
+	   <h1 class="font_50 mt-4">Découvrez le <span class="col_oran">luxe</span> automobile <br> en RDC</h1>	
+	   <p class="mt-4 mb-4">Notre expertise en import-export de véhicules haut de gamme pour répondre à tous vos besoins</p>
+	   <h6 class="d-inline-block me-2 mb-0"><a class="button" href="{% url 'models' %}">Réserver <i class="fa fa-check-circle ms-1"></i> </a></h6>
+	   <h6 class="d-inline-block mb-0"><a class="button_1" href="{% url 'about' %}">En savoir plus <i class="fa fa-check-circle ms-1"></i> </a></h6>	
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</section>
+ </div>
+ <div class="main_3 position-absolute w-100 clearfix">
+   <section id="booking">
+<div class="container-xl">
+ <div class="booking_m clearfix bg-white">
+   <div class="row booking_1">
+  <div class="col-md-12">
+   <h4 class="mb-0">Choisissez un véhicule</h4>
+  </div>
+ </div>
+ <div class="row booking_2 mt-4">
+  <div class="col-md-4 col-sm-6">
+   <div class="booking_2i">
+    <h6 class="mb-3"><i class="fa fa-car me-1 col_oran"></i> Sélectionnez votre type de véhicule</h6>
+	<select class="form-select" id="example-select">
+        <option>Sélectionnez votre type de véhicule</option>
+        <option>Mercedes</option>
+        <option>BMW</option>
+        <option>Audi</option>
+        <option>Lexus</option>
+        <option>Toyota</option>
+    </select>
+   </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+   <div class="booking_2i">
+    <h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Lieu de prise en charge</h6>
+	<select class="form-select" id="example-select">
+        <option>Kinshasa</option>
+        <option>Matadi</option>
+        <option>Lubumbashi</option>
+        <option>Goma</option>
+        <option>Kolwezi</option>
+    </select>
+   </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+   <div class="booking_2i">
+    <h6 class="mb-3"><i class="fa fa-map-marker me-1 col_oran"></i> Lieu de retour</h6>
+	<select class="form-select" id="example-select">
+        <option>Kinshasa</option>
+        <option>Matadi</option>
+        <option>Lubumbashi</option>
+        <option>Goma</option>
+        <option>Kolwezi</option>
+    </select>
+   </div>
+  </div>
+ </div>
+ <div class="row booking_2 mt-4">
+  <div class="col-md-4 col-sm-6">
+   <div class="booking_2i">
+    <h6 class="mb-3"><i class="fa fa-calendar me-1 col_oran"></i> Date de prise en charge</h6>
+	<div class="booking_2i1 row">
+	 <div class="col-md-8">
+	  <div class="booking_2i1l">
+	    <input class="form-control" id="example-date" type="date" name="date">
+	  </div>
+	 </div>
+	 <div class="col-md-4 ps-0">
+	  <div class="booking_2i1r">
+	    <select class="form-select" id="example-select">
+<option value="12:00 AM">12:00 AM</option>
+<option value="12:30 AM">12:30 AM</option>
+<option value="01:00 AM">01:00 AM</option>
+<option value="01:30 AM">01:30 AM</option>
+<option value="02:00 AM">02:00 AM</option>
+<option value="02:30 AM">02:30 AM</option>
+<option value="03:00 AM">03:00 AM</option>
+<option value="03:30 AM">03:30 AM</option>
+<option value="04:00 AM">04:00 AM</option>
+<option value="04:30 AM">04:30 AM</option>
+<option value="05:00 AM">05:00 AM</option>
+<option value="05:30 AM">05:30 AM</option>
+<option value="06:00 AM">06:00 AM</option>
+<option value="06:30 AM">06:30 AM</option>
+<option value="07:00 AM">07:00 AM</option>
+<option value="07:30 AM">07:30 AM</option>
+<option value="08:00 AM">08:00 AM</option>
+<option value="08:30 AM">08:30 AM</option>
+<option value="09:00 AM">09:00 AM</option>
+<option value="09:30 AM">09:30 AM</option>
+<option value="10:00 AM">10:00 AM</option>
+<option value="10:30 AM">10:30 AM</option>
+<option value="11:00 AM">11:00 AM</option>
+<option value="11:30 AM">11:30 AM</option>
+<option value="12:00 PM">12:00 PM</option>
+<option value="12:30 PM">12:30 PM</option>
+<option value="01:00 PM">01:00 PM</option>
+<option value="01:30 PM">01:30 PM</option>
+<option value="02:00 PM">02:00 PM</option>
+<option value="02:30 PM">02:30 PM</option>
+<option value="03:00 PM">03:00 PM</option>
+<option value="03:30 PM">03:30 PM</option>
+<option value="04:00 PM">04:00 PM</option>
+<option value="04:30 PM">04:30 PM</option>
+<option value="05:00 PM">05:00 PM</option>
+<option value="05:30 PM">05:30 PM</option>
+ <option value="06:00 PM">06:00 PM</option>
+<option value="06:30 PM">06:30 PM</option>
+<option value="07:00 PM">07:00 PM</option>
+<option value="07:30 PM">07:30 PM</option>
+<option value="08:00 PM">08:00 PM</option>
+<option value="08:30 PM">08:30 PM</option>
+<option value="09:00 PM">09:00 PM</option>
+<option value="09:30 PM">09:30 PM</option>
+<option value="10:00 PM">10:30 PM</option>
+<option value="10:30 PM">12:00 AM</option>
+<option value="11:00 PM">11:00 PM</option>
+<option value="11:30 PM">11:30 PM</option>
+</select>
+	  </div>
+	 </div>
+	</div>
+   </div>
+  </div>
+  <div class="col-md-4 col-sm-6">
+   <div class="booking_2i">
+    <h6 class="mb-3"><i class="fa fa-calendar me-1 col_oran"></i> Date de retour</h6>
+	<div class="booking_2i1 row">
+	 <div class="col-md-8">
+	  <div class="booking_2i1l">
+	    <input class="form-control" id="example-date" type="date" name="date">
+	  </div>
+	 </div>
+	 <div class="col-md-4 ps-0">
+	  <div class="booking_2i1r">
+	    <select class="form-select" id="example-select">
+<option value="12:00 AM">12:00 AM</option>
+<option value="12:30 AM">12:30 AM</option>
+<option value="01:00 AM">01:00 AM</option>
+<option value="01:30 AM">01:30 AM</option>
+<option value="02:00 AM">02:00 AM</option>
+<option value="02:30 AM">02:30 AM</option>
+<option value="03:00 AM">03:00 AM</option>
+<option value="03:30 AM">03:30 AM</option>
+<option value="04:00 AM">04:00 AM</option>
+<option value="04:30 AM">04:30 AM</option>
+<option value="05:00 AM">05:00 AM</option>
+<option value="05:30 AM">05:30 AM</option>
+<option value="06:00 AM">06:00 AM</option>
+<option value="06:30 AM">06:30 AM</option>
+<option value="07:00 AM">07:00 AM</option>
+<option value="07:30 AM">07:30 AM</option>
+<option value="08:00 AM">08:00 AM</option>
+<option value="08:30 AM">08:30 AM</option>
+<option value="09:00 AM">09:00 AM</option>
+<option value="09:30 AM">09:30 AM</option>
+<option value="10:00 AM">10:00 AM</option>
+<option value="10:30 AM">10:30 AM</option>
+<option value="11:00 AM">11:00 AM</option>
+<option value="11:30 AM">11:30 AM</option>
+<option value="12:00 PM">12:00 PM</option>
+<option value="12:30 PM">12:30 PM</option>
+<option value="01:00 PM">01:00 PM</option>
+<option value="01:30 PM">01:30 PM</option>
+<option value="02:00 PM">02:00 PM</option>
+<option value="02:30 PM">02:30 PM</option>
+<option value="03:00 PM">03:00 PM</option>
+<option value="03:30 PM">03:30 PM</option>
+<option value="04:00 PM">04:00 PM</option>
+<option value="04:30 PM">04:30 PM</option>
+<option value="05:00 PM">05:00 PM</option>
+<option value="05:30 PM">05:30 PM</option>
+ <option value="06:00 PM">06:00 PM</option>
+<option value="06:30 PM">06:30 PM</option>
+<option value="07:00 PM">07:00 PM</option>
+<option value="07:30 PM">07:30 PM</option>
+<option value="08:00 PM">08:00 PM</option>
+<option value="08:30 PM">08:30 PM</option>
+<option value="09:00 PM">09:00 PM</option>
+<option value="09:30 PM">09:30 PM</option>
+<option value="10:00 PM">10:30 PM</option>
+<option value="10:30 PM">12:00 AM</option>
+<option value="11:00 PM">11:00 PM</option>
+<option value="11:30 PM">11:30 PM</option>
+</select>
+	  </div>
+	 </div>
+	</div>
+   </div>
+  </div>
+  <div class="col-md-4 col-sm-12">
+   <div class="booking_2i">
+        <h6 class="mb-3"><i class="fa fa-search me-1 col_oran"></i> Rechercher</h6>
+	<h6 class="text-center mb-0"><a class="button pt-3 pb-3 d-block" href="{% url 'models' %}">Rechercher</a></h6>
+   </div>
+  </div>
+ </div>
+ </div>
+</div>
+</section>
+ </div>
+</div>
+
+<section id="trip" class="p_3">
+<div class="container-xl">
+  <div class="row trip_1 text-center mb-4">
+   <div class="col-md-12">
+    <h5 class="col_oran">Planifiez votre voyage maintenant</h5>
+	<h1 class="mb-0">Location de véhicules rapide et facile</h1>
+   </div>
+  </div>
+  <div class="row trip_2">
+   <div class="col-md-4">
+    <div class="trip_2i text-center">
+	 <span class="d-inline-block fs-1"><a class="col_oran" href="#"><i class="fa fa-car"></i></a></span>
+	 <h3 class="mt-3"><a href="{% url 'models' %}">Sélectionner un véhicule</a></h3>
+	 <p class="mb-0 mt-3">Choisissez parmi notre gamme complète de véhicules de luxe disponibles pour la location</p>
+	</div>
+   </div>
+   <div class="col-md-4">
+    <div class="trip_2i text-center">
+	 <span class="d-inline-block fs-1"><a class="col_oran" href="#"><i class="fa fa-user-plus"></i></a></span>
+	 <h3 class="mt-3"><a href="{% url 'contact' %}">Contacter l'opérateur</a></h3>
+	 <p class="mb-0 mt-3">Notre équipe d'experts est disponible pour vous conseiller et répondre à toutes vos questions</p>
+	</div>
+   </div>
+   <div class="col-md-4">
+    <div class="trip_2i text-center">
+	 <span class="d-inline-block fs-1"><a class="col_oran" href="#"><i class="fa fa-car"></i></a></span>
+	 <h3 class="mt-3"><a href="{% url 'models' %}">C'est parti !</a></h3>
+	 <p class="mb-0 mt-3">Profitez de votre véhicule de luxe et vivez une expérience de conduite exceptionnelle</p>
+	</div>
+   </div>
+  </div>
+</div>
+</section>
+
+<section id="about_h" class="p_3 bg_light">
+<div class="container-xl">
+  <div class="row trip_1 text-center mb-4">
+   <div class="col-md-12">
+    <h5 class="col_oran">AUTO REPUBLIC RDC Models</h5>
+	<h1>Notre flotte de location</h1>
+	<p class="mb-0">Découvrez notre sélection de véhicules haut de gamme pour tous vos besoins <br> de transport en République Démocratique du Congo</p>
+   </div>
+  </div>
+  <div class="row about_h1">
+    <div class="col-md-5">
+	 <div class="about_h1l clearfix position-relative">
+      <div class="clearfix about_h1l1">
+	    <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="{% url 'models' %}"><img src="{% static 'img/4.jpg' %}" class="w-100" alt="AUTO REPUBLIC RDC - Véhicules de luxe"></a>
+				  </figure>
+			  </div>
+	  </div>
+	  <div class="clearfix about_h1l2 position-absolute">
+	    <span class="d-inline-block bg_oran text-center fs-3"><a class="text-white d-block" href="#"><i class="fa fa-play"></i></a></span>
+	  </div>
+	 </div>
+	</div>
+	<div class="col-md-7">
+	 <div class="about_h1r">
+	  <h5 class="col_oran">About AUTO REPUBLIC RDC</h5>
+    <h1>Vous démarrez le moteur <br> et votre aventure <br> commence</h1>
+	  <p class="mt-3">Leader automobile en RDC spécialisé dans la vente, location et services après-vente. Import-Export en gros de véhicules haut de gamme pour répondre aux besoins les plus exigeants de nos clients.</p>
+	  <hr>
+	  <div class="about_h1ri row">
+	   <div class="col-md-4 col-sm-4">
+	    <div class="about_h1ri1">
+		 <span class="font_50 col_oran"><i class="fa fa-car"></i></span>
+		 <h1>50+</h1>
+		 <h6 class="col_light fw-normal mb-0">Types de véhicules</h6>
+		</div>
+	   </div>
+	   <div class="col-md-4 col-sm-4">
+	    <div class="about_h1ri1">
+		 <span class="font_50 col_oran"><i class="fa fa-building"></i></span>
+		 <h1>5</h1>
+		 <h6 class="col_light fw-normal mb-0">Points de location</h6>
+		</div>
+	   </div>
+	   <div class="col-md-4 col-sm-4">
+	    <div class="about_h1ri1">
+		 <span class="font_50 col_oran"><i class="fa fa-shirtsinbulk"></i></span>
+		 <h1>3</h1>
+		 <h6 class="col_light fw-normal mb-0">Garages</h6>
+		</div>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+  </div>
+</div>
+</section>
+
+<section id="ride">
+<div class="ride_m">
+ <div class="container-xl">
+ <div class="row ride_1">
+  <div class="col-md-8">
+   <div class="ride_1l">
+    <h1 class="text-white">Économisez gros avec notre <br> location de véhicules !</h1>
+	<p class="text-light mb-0 fs-4 mt-3">Prix compétitifs. Service local. Support 24h/24.</p>
+   </div>
+  </div>
+  <div class="col-md-4">
+   <div class="ride_1r mt-4 text-end">
+     <h6 class="mb-0"><a class="button_2" href="{% url 'models' %}">Réserver <i class="fa fa-check-circle ms-1"></i> </a></h6>
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+</section>
+
+<section id="choose" class="p_3">
+<div class="container-xl">
+  <div class="row choose_1">
+   <div class="col-md-7">
+    <div class="choose_1l">
+	 <h5 class="col_oran">Pourquoi nous choisir</h5>
+	 <h1>Les meilleures offres que <br> vous trouverez jamais</h1>
+	 <p class="mt-3">AUTO REPUBLIC RDC vous offre les meilleures conditions de location et d'achat de véhicules haut de gamme. Notre expertise et notre service client exceptionnel font de nous le choix idéal pour tous vos besoins automobiles.</p>
+	 <h6 class="mb-0 mt-4"><a class="button" href="{% url 'models' %}">Voir les offres <i class="fa fa-check-circle ms-1"></i> </a></h6>
+	</div>
+   </div>
+   <div class="col-md-5">
+    <div class="choose_1r">
+	 <div class="choose_1ri row">
+	  <div class="col-md-3">
+	   <div class="choose_1ril">
+	    <span class="fs-1 d-inline-block text-center col_oran"><i class="fa fa-car"></i></span>
+	   </div>
+	  </div>
+	  <div class="col-md-9">
+	   <div class="choose_1rir">
+	    <h4>Conduite longue distance</h4>
+		<p class="mb-0 mt-3">Nos véhicules sont parfaitement adaptés pour les longs trajets à travers la RDC. Confort et fiabilité garantis.</p>
+	   </div>
+	  </div>
+	 </div><hr>
+	 <div class="choose_1ri row mt-3">
+	  <div class="col-md-3">
+	   <div class="choose_1ril">
+	    <span class="fs-1 d-inline-block text-center col_oran"><i class="fa fa-dollar"></i></span>
+	   </div>
+	  </div>
+	  <div class="col-md-9">
+	   <div class="choose_1rir">
+	    <h4>Tarification tout inclus</h4>
+		<p class="mb-0 mt-3">Nos prix incluent tous les services essentiels. Aucune surprise, aucune charge cachée.</p>
+	   </div>
+	  </div>
+	 </div><hr>
+	 <div class="choose_1ri row mt-3">
+	  <div class="col-md-3">
+	   <div class="choose_1ril">
+	    <span class="fs-1 d-inline-block text-center col_oran"><i class="fa fa-rupee"></i></span>
+	   </div>
+	  </div>
+	  <div class="col-md-9">
+	   <div class="choose_1rir">
+	    <h4>Aucun frais caché</h4>
+		<p class="mb-0 mt-3">Transparence totale dans nos tarifs. Vous savez exactement ce que vous payez, sans surprise.</p>
+	   </div>
+	  </div>
+	 </div>
+	</div>
+   </div>
+  </div>
+  
+</div>
+</section>
+
+<section id="testim" class="p_3 bg_light">
+<div class="container-xl">
+ <div class="row trip_1 text-center mb-4">
+   <div class="col-md-12">
+    <h5 class="col_oran">Évalué par nos clients</h5>
+	<h1>Témoignages clients</h1>
+	<p class="mb-0">Découvrez ce que nos clients disent de notre service <br> et de la qualité de nos véhicules</p>
+   </div>
+  </div>  
+  <div class="row testim_1">
+		  <div id="carouselExampleCaptions2" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions2" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="testim_1i row">
+	     <div class="col-md-6">
+		  <div class="testim_1i1 text-center p-4 pt-5 pb-5 bg-white rounded">
+		    <img src="{% static 'img/6.jpg' %}" alt="abc" class="rounded-circle">
+			<h4 class="mt-3">Jean-Pierre M.</h4>
+			<h6 class="fw-normal col_light">Directeur, Entreprise Kinshasa</h6>
+			<span class="font_50"><i class="fa fa-quote-left"></i></span>
+			<p>Service exceptionnel ! AUTO REPUBLIC m'a fourni une Mercedes parfaitement entretenue pour mes déplacements professionnels. L'équipe est très professionnelle et les prix sont très compétitifs.</p>
+             <span class="col_oran">
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star-half-o"></i>
+			 </span>
+		  </div>
+		 </div>
+		 <div class="col-md-6">
+		  <div class="testim_1i1 text-center p-4 pt-5 pb-5 bg-white rounded">
+		    <img src="{% static 'img/7.jpg' %}" alt="abc" class="rounded-circle">
+			<h4 class="mt-3">Marie K.</h4>
+			<h6 class="fw-normal col_light">Famille, Lubumbashi</h6>
+			<span class="font_50"><i class="fa fa-quote-left"></i></span>
+			<p>Parfait pour nos voyages familiaux ! Le véhicule était impeccable et le processus de réservation très simple. Je recommande vivement AUTO REPUBLIC pour tous vos besoins de location.</p>
+             <span class="col_oran">
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star-half-o"></i>
+			 </span>
+		  </div>
+		 </div>
+	  </div>
+    </div>
+    <div class="carousel-item">
+       <div class="testim_1i row">
+	     <div class="col-md-6">
+		  <div class="testim_1i1 text-center p-4 pt-5 pb-5 bg-white rounded">
+		    <img src="{% static 'img/8.jpg' %}" alt="abc" class="rounded-circle">
+			<h4 class="mt-3">Paul M.</h4>
+			<h6 class="fw-normal col_light">Entrepreneur, Goma</h6>
+			<span class="font_50"><i class="fa fa-quote-left"></i></span>
+			<p>Excellent rapport qualité-prix ! J'ai loué un BMW pour mes déplacements d'affaires et j'ai été très satisfait du service. L'équipe AUTO REPUBLIC est très réactive et professionnelle.</p>
+             <span class="col_oran">
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star-half-o"></i>
+			 </span>
+		  </div>
+		 </div>
+		 <div class="col-md-6">
+		  <div class="testim_1i1 text-center p-4 pt-5 pb-5 bg-white rounded">
+		    <img src="{% static 'img/9.jpg' %}" alt="abc" class="rounded-circle">
+			<h4 class="mt-3">Sophie L.</h4>
+			<h6 class="fw-normal col_light">Particulier, Matadi</h6>
+			<span class="font_50"><i class="fa fa-quote-left"></i></span>
+			<p>Service client au top ! J'ai eu un problème avec ma réservation et l'équipe a tout résolu rapidement. Les véhicules sont de très bonne qualité et les prix attractifs.</p>
+             <span class="col_oran">
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star"></i>
+			  <i class="fa fa-star-half-o"></i>
+			 </span>
+		  </div>
+		 </div>
+	  </div>
+    </div>
+  </div>
+</div>
+		</div>
+</div>
+</section>
+
+<section id="faq" class="p_3">
+<div class="container-xl">
+ <div class="row trip_1 text-center mb-4">
+   <div class="col-md-12">
+    <h5 class="col_oran">FAQ</h5>
+	<h1>Questions fréquemment posées</h1>
+	<p class="mb-0">Trouvez les réponses aux questions les plus courantes <br> sur nos services de location et d'achat de véhicules</p>
+   </div>
+  </div>  
+  <div class="row faq_1">
+    <div class="col-md-6">
+     <div class="faq_1l">
+	   <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="{% url 'contact' %}"><img src="{% static 'img/10.jpg' %}" class="w-100" alt="AUTO REPUBLIC RDC - Service client" style="height: 300px; object-fit: cover;"></a>
+				  </figure>
+			  </div>
+	 </div>
+	</div>
+	<div class="col-md-6">
+     <div class="faq_1r">
+	   <div class="accordion" id="accordionExample">
+			<div class="accordion-item">
+			<h2 class="accordion-header" id="headingOne">
+			<button class="accordion-button mt-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			Qu'est-ce qui rend AUTO REPUBLIC spécial dans la location de véhicules ?
+			</button>
+			</h2>
+			<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+			  AUTO REPUBLIC se distingue par son expertise en véhicules haut de gamme, ses prix compétitifs et son service client exceptionnel. Nous offrons une gamme complète de véhicules de luxe avec des conditions de location flexibles et transparentes.
+			</div>
+			</div>
+			</div>
+			
+			<div class="accordion-item">
+			<h2 class="accordion-header" id="headingTwo">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			Où se trouve le bureau principal d'AUTO REPUBLIC ?
+			</button>
+			</h2>
+			<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+			Notre bureau principal se trouve au croisement des avenues Forces Armées et Dracena, à Ombe, Kinshasa, Congo. Nous avons également des points de service dans les principales villes de la RDC.
+			</div>
+			</div>
+			</div>
+			
+			<div class="accordion-item">
+			<h2 class="accordion-header" id="heading3">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapseTwo">
+			Combien de clients avez-vous ?
+			</button>
+			</h2>
+			<div id="collapse3" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+			AUTO REPUBLIC compte des milliers de clients satisfaits à travers la RDC. Nous servons aussi bien les particuliers que les entreprises, avec une clientèle fidèle qui nous fait confiance pour tous leurs besoins automobiles.
+			</div>
+			</div>
+			</div>
+			
+			<div class="accordion-item">
+			<h2 class="accordion-header" id="heading4">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapseTwo">
+			Quels sont vos horaires d'ouverture ?
+			</button>
+			</h2>
+			<div id="collapse4" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+			Nos bureaux sont ouverts du lundi au vendredi de 9h00 à 21h00, le samedi de 9h00 à 18h00. Nous sommes fermés le dimanche. Notre service client est disponible 24h/24 pour les urgences.
+			</div>
+			</div>
+			</div>
+			
+			<div class="accordion-item">
+			<h2 class="accordion-header" id="heading5">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapseTwo">
+			En bref, que fait AUTO REPUBLIC ?
+			</button>
+			</h2>
+			<div id="collapse5" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+			AUTO REPUBLIC est spécialisé dans la vente, location et services après-vente de véhicules haut de gamme en RDC. Nous proposons également des services d'import-export en gros et de maintenance automobile professionnelle.
+			</div>
+			</div>
+			</div>
+
+</div>
+	 </div>
+	</div>
+  </div>
+</div>
+</section>
+
+<section id="footer" class="pt-3 pb-3">
+<div class="container-xl">
+  <div class="row footer_1">
+    <div class="col-md-4">
+	 <div class="footer_1i">
+	  <h4><a href="{% url 'index' %}"><i class="fa fa-car col_oran "></i> AUTO  <span class="fw-normal"></span>REPUBLIC</a></h4>
+	  <p class="mt-3">Utiliser la sécurisation confinée de ses volets.</p>
+	  <h6 class="mt-3 fw-normal"><i class="fa fa-map col_oran me-1"></i> Croisement avenues Forces Armées et Dracena, Ombe, Kinshasa, Congo</h6>
+	  <h6 class="mt-3 fw-normal"><a href="#"><i class="fa fa-phone col_oran me-1"></i> +243 819635442 </a></h6>
+	  <h6 class="mt-3 mb-0 fw-normal"><a href="#"><i class="fa fa-envelope col_oran me-1"></i> AutoRepublic@gmail.com</a></h6>
+	 </div>
+	</div>
+
+	<div class="col-md-4">
+	 <div class="footer_1i">
+	  <h4>WORK HOURS</h4>
+      <p class="mt-3">Lun - Ven: <span class="fw-bold text-black">09:00 - 21:00</span></p>
+	  <p class="mt-3">Sam: <span class="fw-bold text-black">09:00 - 18:00</span></p>
+	  <p class="mt-3 mb-0">Dim: <span class="fw-bold text-black">Fermé</span></p>
+	 </div>
+	</div>
+	<div class="col-md-4">
+	 <div class="footer_1i">
+	  <h4>Abonnez-vous</h4>
+      <p class="mt-3">Abonnez-vous à votre adresse e-mail pour recevoir les dernières nouvelles et mises à jour.</p>
+	  <form id="newsletterForm">
+		{% csrf_token %}
+		<input class="form-control" placeholder="Entrez votre adresse email" type="email" name="email" id="newsletterEmail" required>
+		<h6 class="mb-0 mt-4"><a class="button pt-3 pb-3" href="#" id="submitNewsletter">S'abonner <i class="fa fa-check-circle ms-1"></i> </a></h6>
+	  </form>
+	 </div>
+	</div>
+  </div><hr>
+  <div class="row footer_2">
+   <div class="col-md-8">
+    <div class="footer_2l">
+	 <p class="mb-0 mt-1">© 2025 AUTO REPUBLIC RDC. Tous droits réservés | Design par <a class="col_green" href="http://www.templateonweb.com">LeSage</a></p>
+	</div>
+   </div>
+   <div class="col-md-4">
+    <div class="footer_2r text-end">
+	  <ul class="social-network social-circle mb-0">
+					<li><a href="https://www.instagram.com/autorepublicrdc?igsh=eHFpZjBjZmJoaGc4" class="icoInstagram" title="Instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+					<li><a href="https://www.facebook.com/share/1BS9PFUVqW/?mibextid=wwXIfr" class="icoFacebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+				</ul>
+	</div>
+   </div>
+  </div>
+</div>
+</section>
+
+<script>
+// Variables globales pour le loader
+let loaderStartTime = null;
+
+// Fonction pour afficher le loader
+function showGlobalLoader(message = 'Traitement en cours...') {
+    const loader = document.getElementById('globalLoader');
+    const loaderMessage = document.getElementById('loaderMessage');
+    
+    if (loader && loaderMessage) {
+        loaderMessage.textContent = message;
+        loader.style.setProperty('display', 'flex', 'important');
+        loader.style.setProperty('visibility', 'visible', 'important');
+        loader.style.setProperty('opacity', '1', 'important');
+        loader.style.setProperty('z-index', '9999', 'important');
+        
+        // Empêcher les interactions avec le reste de la page
+        document.body.style.pointerEvents = 'none';
+        document.body.style.userSelect = 'none';
+        
+        // Enregistrer le temps de début
+        loaderStartTime = Date.now();
+        
+        console.log('Affichage du loader:', message);
+    }
+}
+
+// Fonction pour masquer le loader
+function hideGlobalLoader() {
+    const loader = document.getElementById('globalLoader');
+    
+    if (loader) {
+        // Calculer le temps écoulé
+        const elapsed = loaderStartTime ? Date.now() - loaderStartTime : 0;
+        const minDelay = 500; // Délai minimum de 500ms
+        
+        if (elapsed < minDelay) {
+            // Attendre le temps restant
+            setTimeout(() => {
+                loader.style.setProperty('display', 'none', 'important');
+                loader.style.setProperty('visibility', 'hidden', 'important');
+                loader.style.setProperty('opacity', '0', 'important');
+                
+                // Restaurer les interactions
+                document.body.style.pointerEvents = 'auto';
+                document.body.style.userSelect = 'auto';
+                
+                console.log('Loader masqué');
+            }, minDelay - elapsed);
+        } else {
+            // Masquer immédiatement
+            loader.style.setProperty('display', 'none', 'important');
+            loader.style.setProperty('visibility', 'hidden', 'important');
+            loader.style.setProperty('opacity', '0', 'important');
+            
+            // Restaurer les interactions
+            document.body.style.pointerEvents = 'auto';
+            document.body.style.userSelect = 'auto';
+            
+            console.log('Loader masqué');
+        }
+    }
+}
+
+// Fonction pour afficher une notification
+function showNotification(message, type = 'success') {
+    const container = document.getElementById('notificationContainer');
+    if (!container) return;
+    
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`;
+    notification.style.cssText = 'margin-bottom: 10px; max-width: 400px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);';
+    
+    notification.innerHTML = `
+        <strong>${type === 'success' ? '✅ Succès' : '❌ Erreur'}</strong><br>
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    container.appendChild(notification);
+    
+    // Auto-suppression après 4 secondes
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 4000);
+}
+
+// Gestionnaire pour le formulaire de newsletter
+document.addEventListener('DOMContentLoaded', function() {
+    const submitNewsletter = document.getElementById('submitNewsletter');
+    const newsletterForm = document.getElementById('newsletterForm');
+    
+    if (submitNewsletter && newsletterForm) {
+        submitNewsletter.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('newsletterEmail');
+            if (!emailInput || !emailInput.value.trim()) {
+                showNotification('Veuillez entrer une adresse email valide.', 'error');
+                return;
+            }
+            
+            // Validation basique de l'email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value.trim())) {
+                showNotification('Veuillez entrer une adresse email valide.', 'error');
+                return;
+            }
+            
+            // Afficher le loader
+            showGlobalLoader('Abonnement à la newsletter...');
+            
+            // Désactiver le bouton
+            submitNewsletter.style.pointerEvents = 'none';
+            submitNewsletter.style.opacity = '0.6';
+            
+            // Préparer les données
+            const formData = new FormData();
+            formData.append('email', emailInput.value.trim());
+            formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+            
+            // Envoyer la requête
+            fetch('{% url "create_newsletter_subscription" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification(data.message, 'success');
+                    newsletterForm.reset();
+                } else {
+                    showNotification(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                showNotification('Une erreur est survenue. Veuillez réessayer.', 'error');
+            })
+            .finally(() => {
+                hideGlobalLoader();
+                submitNewsletter.style.pointerEvents = 'auto';
+                submitNewsletter.style.opacity = '1';
+            });
+        });
+    }
+});
+
+window.onscroll = function() {myFunction()};
+
+var navbar_sticky = document.getElementById("navbar_sticky");
+var sticky = navbar_sticky.offsetTop;
+var navbar_height = document.querySelector('.navbar').offsetHeight;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky + navbar_height) {
+    navbar_sticky.classList.add("sticky")
+	document.body.style.paddingTop = navbar_height + 'px';
+  } else {
+    navbar_sticky.classList.remove("sticky");
+	document.body.style.paddingTop = '0'
+  }
+}
+</script>
+
+</body>
+
+</html>

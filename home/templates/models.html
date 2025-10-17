@@ -1,0 +1,1486 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Auto REPUBLIC</title>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" >
+	<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" >
+	<link href="{% static 'css/global.css' %}" rel="stylesheet">
+	<link href="{% static 'css/models.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</head>
+<body>
+
+<div class="main_o clearfix position-relative">
+ <div class="main_1 clearfix position-absolute top-0 w-100">
+   <section id="header">
+<nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky">
+  <div class="container-xl">
+    <a class="navbar-brand fs-3 p-0 fw-bold text-white" href="{% url 'index' %}"><i class="fa fa-car col_oran me-1 fs-2 align-middle"></i> AUTO <br> <span class="fs-5 span_1">REPUBLIC</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-0 ">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link" href="{% url 'about' %}">About </a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link active" href="{% url 'models' %}">Vehicle Models </a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link" href="{% url 'garage' %}">Garage</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</section>
+ </div>
+ <div class="main_2 clearfix">
+ <section id="center" class="center_o">
+   <div class="center_om clearfix">
+     <div class="container-xl">
+  <div class="row center_o1">
+   <div class="col-md-12">
+      <h2 class="text-white">Vehicle Models</h2>
+	  <h6 class="mb-0 mt-3 fw-normal col_oran"><a class="text-light" href="{% url 'index' %}">Home</a> <span class="mx-2 col_light">/</span> Vehicle Models</h6>
+   </div>
+  </div>
+ </div>
+   </div>
+ </section>
+ </div>
+ 
+</div>
+
+<section id="model_pg" class="p_3">
+<div class="container-xl">
+  <div class="row model_pg1">
+   {% for vehicle in vehicles %}
+   <div class="col-md-4">
+    <div class="model_pg1i clearfix">
+	 <div class="model_pg1i1">
+	   <div class="grid clearfix">
+				  <figure class="effect-jazz mb-0">
+					<a href="#"><img src="{% static vehicle.image %}" class="w-100" alt="{{ vehicle.name }}"></a>
+				  </figure>
+			  </div>
+	 </div>
+	 <div class="model_m p-3 clearfix border-top-0">
+	   <div class="model_pg1i2 row">
+	  <div class="col-md-6 col-sm-6">
+	   <div class="model_pg1i2l">
+	    <h4>{{ vehicle.name }}</h4>
+		<span class="font_12 col_yell">
+		   <i class="fa fa-star"></i>
+		   <i class="fa fa-star"></i>
+		   <i class="fa fa-star"></i>
+		   <i class="fa fa-star"></i>
+		   <i class="fa fa-star-half-o"></i>
+		  </span>
+	   </div>
+	  </div>
+	  <div class="col-md-6 col-sm-6">
+
+	  </div>
+	 </div>
+	 <div class="model_pg1i3 row mt-4 mb-4">
+	  <div class="col-md-6 col-sm-6">
+	   <div class="model_pg1i3l">
+	     <h6><i class="fa fa-car col_oran me-1"></i> {{ vehicle.vehicle_type }}</h6>
+		 <h6 class="mb-0 mt-3"><i class="fa fa-male col_oran me-1"></i> {{ vehicle.seats }} Seats</h6>
+	   </div>
+	  </div>
+	  <div class="col-md-6 col-sm-6">
+	   <div class="model_pg1i3l text-end">
+	     <h6><i class="fa fa-suitcase col_oran me-1"></i> {{ vehicle.luggage }} Luggage</h6>
+		 <h6 class="mb-0 mt-3"><i class="fa fa-female col_oran me-1"></i> {{ vehicle.seats }} Seats</h6>
+	   </div>
+	  </div>
+	 </div><hr>
+	 
+	 <div class="model_pg1i4 row text-center mt-4">
+	  <div class="col-md-12">
+	      <h6 class="mb-0">
+	        <a class="button book-btn me-2" href="#" data-vehicle-id="{{ vehicle.id }}" data-vehicle-name="{{ vehicle.name }}" data-vehicle-price="{{ vehicle.price_per_day }}">Book Ride <i class="fa fa-check-circle ms-1"></i></a>
+	        <a class="button purchase-btn" href="#" data-vehicle-id="{{ vehicle.id }}" data-vehicle-name="{{ vehicle.name }}" data-vehicle-price="{{ vehicle.price_per_day }}" style="background-color: #28a745;">Acheter <i class="fa fa-shopping-cart ms-1"></i></a>
+	      </h6>
+	  </div>
+	 </div>
+	 </div>
+	</div>
+   </div>
+   {% endfor %}
+  </div>
+</div>
+</section>
+
+<!-- Modal de réservation -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Réserver un véhicule</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="bookingForm">
+          {% csrf_token %}
+          <input type="hidden" id="selectedVehicleId" name="vehicle_id">
+          
+          <!-- Liste des véhicules sélectionnés -->
+          <div class="row mb-4">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title">Véhicules sélectionnés</h6>
+                  <div id="selectedVehiclesList">
+                    <!-- Les véhicules sélectionnés apparaîtront ici -->
+                  </div>
+                  <div class="mt-3">
+                    <button type="button" class="btn btn-outline-primary btn-sm" id="addVehicleBtn">Ajouter un véhicule</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="changeVehicleBtn" style="display: none;">Modifier</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Informations personnelles -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">Prénom *</label>
+                <input type="text" class="form-control" id="firstName" name="first_name" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Nom *</label>
+                <input type="text" class="form-control" id="lastName" name="last_name" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="phone" class="form-label">Téléphone *</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dates et heures -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="pickupDate" class="form-label">Date de prise en charge *</label>
+                <input type="date" class="form-control" id="pickupDate" name="pickup_date" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="pickupTime" class="form-label">Heure de prise en charge *</label>
+                <input type="time" class="form-control" id="pickupTime" name="pickup_time" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="returnDate" class="form-label">Date de retour *</label>
+                <input type="date" class="form-control" id="returnDate" name="return_date" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="returnTime" class="form-label">Heure de retour *</label>
+                <input type="time" class="form-control" id="returnTime" name="return_time" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lieux -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="pickupLocation" class="form-label">Lieu de prise en charge *</label>
+                <input type="text" class="form-control" id="pickupLocation" name="pickup_location" placeholder="Adresse complète" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="destination" class="form-label">Destination *</label>
+                <input type="text" class="form-control" id="destination" name="destination" placeholder="Ville ou adresse de destination" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Résumé de la réservation -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-info">
+                <h6>Résumé de la réservation</h6>
+                <p class="mb-1">Durée: <span id="duration">-</span> jour(s)</p>
+                <p class="mb-1">Véhicules: <span id="vehicleCount">-</span> véhicule(s)</p>
+                <p class="mb-0 text-muted">Le détail des prix sera envoyé par email</p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" id="confirmBooking">Confirmer la réservation</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Système de notifications -->
+<div id="notificationContainer" class="position-fixed" style="top: 20px; right: 20px; z-index: 9999;">
+  <!-- Les notifications apparaîtront ici -->
+</div>
+
+<!-- Loader global -->
+<div id="globalLoader" class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 9999; display: none;">
+  <div class="card shadow-lg border-0" style="background-color: white; border-radius: 15px; padding: 2rem; min-width: 300px; max-width: 400px;">
+    <div class="text-center">
+      <div class="spinner-border mb-3" role="status" style="width: 3rem; height: 3rem; border-color: #dc3545; border-right-color: transparent;">
+        <span class="visually-hidden">Chargement...</span>
+      </div>
+      <h5 class="text-dark mb-2">Traitement en cours...</h5>
+      <p class="text-muted mb-0">Veuillez patienter</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal d'achat -->
+<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="purchaseModalLabel">Achat de véhicule(s)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="purchaseForm">
+          {% csrf_token %}
+          
+          <!-- Véhicules sélectionnés -->
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <label class="form-label">Véhicules sélectionnés</label>
+              <div id="purchaseSelectedVehiclesList" class="border p-3 rounded" style="min-height: 100px;">
+                <p class="text-muted">Aucun véhicule sélectionné</p>
+              </div>
+              <button type="button" class="btn btn-outline-primary btn-sm mt-2" id="addPurchaseVehicleBtn">
+                <i class="fa fa-plus me-1"></i>Ajouter un véhicule
+              </button>
+              <p class="text-muted mt-2 mb-0"><small>Le détail des prix sera envoyé par email</small></p>
+            </div>
+          </div>
+          
+          <!-- Informations client -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Prénom *</label>
+              <input type="text" class="form-control" id="purchaseFirstName" name="first_name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Nom *</label>
+              <input type="text" class="form-control" id="purchaseLastName" name="last_name" required>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-control" id="purchaseEmail" name="email" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Téléphone *</label>
+              <input type="tel" class="form-control" id="purchasePhone" name="phone" required>
+            </div>
+          </div>
+
+          <!-- Informations de livraison -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Date de livraison *</label>
+              <input type="date" class="form-control" id="purchaseDeliveryDate" name="delivery_date" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Heure de livraison *</label>
+              <input type="time" class="form-control" id="purchaseDeliveryTime" name="delivery_time" required>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <label class="form-label">Adresse de livraison *</label>
+              <textarea class="form-control" id="purchaseDeliveryAddress" name="delivery_address" rows="3" placeholder="Adresse complète de livraison" required></textarea>
+            </div>
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <label class="form-label">Méthode de paiement *</label>
+              <select class="form-control" id="purchasePaymentMethod" name="payment_method" required>
+                <option value="">Choisir une méthode</option>
+                <option value="card">Carte bancaire</option>
+                <option value="transfer">Virement bancaire</option>
+                <option value="cash">Espèces</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Résumé de l'achat -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-info">
+                <h6>Résumé de l'achat</h6>
+                <p class="mb-1">Véhicules: <span id="purchaseVehicleCount">-</span> véhicule(s)</p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-success" id="confirmPurchase">Confirmer l'achat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de sélection de véhicule -->
+<div class="modal fade" id="vehicleSelectionModal" tabindex="-1" aria-labelledby="vehicleSelectionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="vehicleSelectionModalLabel">Choisir un autre véhicule</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          {% for vehicle in vehicles %}
+          <div class="col-md-4 mb-3">
+            <div class="card vehicle-selection-card" data-vehicle-id="{{ vehicle.id }}" data-vehicle-name="{{ vehicle.name }}" data-vehicle-price="{{ vehicle.price_per_day }}">
+              <img src="{% static vehicle.image %}" class="card-img-top" alt="{{ vehicle.name }}">
+              <div class="card-body">
+                <h6 class="card-title">{{ vehicle.name }}</h6>
+                <p class="card-text">
+                  <small class="text-muted">{{ vehicle.vehicle_type }} - {{ vehicle.seats }} places - {{ vehicle.luggage }} bagages</small><br>
+                  <strong>{{ vehicle.price_per_day }}€/jour</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de sélection de véhicule pour achat -->
+<div class="modal fade" id="purchaseVehicleSelectionModal" tabindex="-1" aria-labelledby="purchaseVehicleSelectionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="purchaseVehicleSelectionModalLabel">Choisir un autre véhicule pour l'achat</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          {% for vehicle in vehicles %}
+          <div class="col-md-4 mb-3">
+            <div class="card purchase-vehicle-selection-card" data-vehicle-id="{{ vehicle.id }}" data-vehicle-name="{{ vehicle.name }}" data-vehicle-price="{{ vehicle.price_per_day }}">
+              <img src="{% static vehicle.image %}" class="card-img-top" alt="{{ vehicle.name }}">
+              <div class="card-body">
+                <h6 class="card-title">{{ vehicle.name }}</h6>
+                <p class="card-text">
+                  <small class="text-muted">{{ vehicle.vehicle_type }} - {{ vehicle.seats }} places - {{ vehicle.luggage }} bagages</small><br>
+                  <strong>{{ vehicle.price_per_day }}€</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="ride">
+<div class="ride_m">
+ <div class="container-xl">
+ <div class="row ride_1">
+  <div class="col-md-8">
+   <div class="ride_1l">
+    <h1 class="text-white">Save big with our cheap <br> car rental!</h1>
+	<p class="text-light mb-0 fs-4 mt-3">Top Airports. Local Suppliers. 24/7 Support.</p>
+   </div>
+  </div>
+  <div class="col-md-4">
+   <div class="ride_1r mt-4 text-end">
+     <h6 class="mb-0"><a class="button_2" href="#">Book Ride <i class="fa fa-check-circle ms-1"></i> </a></h6>
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+</section>
+
+<section id="footer" class="pt-3 pb-3">
+  <div class="container-xl">
+    <div class="row footer_1">
+      <div class="col-md-4">
+     <div class="footer_1i">
+      <h4><a href="{% url 'index' %}"><i class="fa fa-car col_oran "></i> AUTO  <span class="fw-normal"></span>REPUBLIC</a></h4>
+      <p class="mt-3">Utiliser la sécurisation confinée de ses volets.</p>
+      <h6 class="mt-3 fw-normal"><i class="fa fa-map col_oran me-1"></i> Croisement avenues Forces Armées et Dracena, Ombe, Kinshasa, Congo</h6>
+      <h6 class="mt-3 fw-normal"><a href="#"><i class="fa fa-phone col_oran me-1"></i> +243 819635442 </a></h6>
+      <h6 class="mt-3 mb-0 fw-normal"><a href="#"><i class="fa fa-envelope col_oran me-1"></i> AutoRepublic@gmail.com</a></h6>
+     </div>
+    </div>
+  
+    <div class="col-md-4">
+     <div class="footer_1i">
+      <h4>WORK HOURS</h4>
+        <p class="mt-3">Lun - Vend: <span class="fw-bold text-black">09:00AM - 09:00PM</span></p>
+      <p class="mt-3">Sam: <span class="fw-bold text-black">09:00AM - 06:00PM</span></p>
+      <p class="mt-3 mb-0">Dim: <span class="fw-bold text-black">Closed</span></p>
+     </div>
+    </div>
+    <div class="col-md-4">
+     <div class="footer_1i">
+      <h4>Abonnez-vous</h4>
+        <p class="mt-3">Abonnez-vous à votre adresse e-mail pour recevoir les dernières nouvelles et mises à jour.</p>
+      <form id="newsletterForm">
+      {% csrf_token %}
+      <input class="form-control" placeholder="Entrez votre adresse email" type="email" name="email" id="newsletterEmail" required>
+      <h6 class="mb-0 mt-4"><a class="button pt-3 pb-3" href="#" id="submitNewsletter">S'abonner <i class="fa fa-check-circle ms-1"></i> </a></h6>
+      </form>
+     </div>
+    </div>
+    </div><hr>
+    <div class="row footer_2">
+     <div class="col-md-8">
+      <div class="footer_2l">
+     <p class="mb-0 mt-1">© 2025 AUTO REPUBLIC. All Rights Reserved | Design by <a class="col_green" href="http://www.templateonweb.com">LeSage</a></p>
+    </div>
+     </div>
+     <div class="col-md-4">
+      <div class="footer_2r text-end">
+      <ul class="social-network social-circle mb-0">
+            <li><a href="https://www.instagram.com/autorepublicrdc?igsh=eHFpZjBjZmJoaGc4" class="icoInstagram" title="Instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="https://www.facebook.com/share/1BS9PFUVqW/?mibextid=wwXIfr" class="icoFacebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+          </ul>
+    </div>
+     </div>
+    </div>
+  </div>
+  </section>
+
+<script>
+// Script pour gérer les modals de réservation
+document.addEventListener('DOMContentLoaded', function() {
+    const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+    const vehicleSelectionModal = new bootstrap.Modal(document.getElementById('vehicleSelectionModal'));
+    const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+    const purchaseVehicleSelectionModal = new bootstrap.Modal(document.getElementById('purchaseVehicleSelectionModal'));
+    
+    let selectedVehicles = [];
+    let editingVehicleIndex = null;
+    let purchaseSelectedVehicles = [];
+    let editingPurchaseVehicleIndex = null;
+    
+    // Fonctions pour nettoyer les listes
+    function clearBookingData() {
+        selectedVehicles = [];
+        editingVehicleIndex = null;
+        displaySelectedVehicles();
+    }
+    
+    function clearPurchaseData() {
+        purchaseSelectedVehicles = [];
+        editingPurchaseVehicleIndex = null;
+        displayPurchaseSelectedVehicles();
+    }
+    
+        // Fonction pour afficher une notification
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            const notificationId = 'notification-' + Date.now();
+            notification.id = notificationId;
+            
+            notification.innerHTML = `
+                <button class="close-btn" onclick="closeNotification('${notificationId}')">&times;</button>
+                <div class="message">${message}</div>
+                <div class="countdown" id="countdown-${notificationId}">Fermeture automatique dans 4s</div>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Animation d'entrée
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Décompte et fermeture automatique
+            let countdown = 4;
+            const countdownElement = document.getElementById(`countdown-${notificationId}`);
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = `Fermeture automatique dans ${countdown}s`;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    closeNotification(notificationId);
+                }
+            }, 1000);
+        }
+        
+        // Fonction pour fermer une notification
+        window.closeNotification = function(notificationId) {
+            const notification = document.getElementById(notificationId);
+            if (notification) {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }
+        };
+        
+        // Fonction pour afficher/masquer le loader global avec délai minimum
+        function showGlobalLoader(message = 'Traitement en cours...') {
+            console.log('Affichage du loader:', message);
+            const loader = document.getElementById('globalLoader');
+            const messageElement = loader.querySelector('h5');
+            messageElement.textContent = message;
+            
+            // Forcer l'affichage avec !important
+            loader.style.setProperty('display', 'flex', 'important');
+            loader.style.setProperty('visibility', 'visible', 'important');
+            loader.style.setProperty('opacity', '1', 'important');
+            loader.style.setProperty('z-index', '9999', 'important');
+            
+            // Empêcher les clics sur le body
+            document.body.style.pointerEvents = 'none';
+            document.body.style.userSelect = 'none';
+            console.log('Loader affiché - z-index:', loader.style.zIndex);
+            
+            // Enregistrer le temps de début
+            loader.dataset.startTime = Date.now();
+        }
+        
+        function hideGlobalLoader() {
+            console.log('Masquage du loader');
+            const loader = document.getElementById('globalLoader');
+            const startTime = parseInt(loader.dataset.startTime || '0');
+            const elapsed = Date.now() - startTime;
+            const minDelay = 500; // Délai minimum de 500ms
+            
+            const hideLoader = () => {
+                loader.style.setProperty('display', 'none', 'important');
+                loader.style.setProperty('visibility', 'hidden', 'important');
+                loader.style.setProperty('opacity', '0', 'important');
+                
+                // Restaurer les clics sur le body
+                document.body.style.pointerEvents = 'auto';
+                document.body.style.userSelect = 'auto';
+                console.log('Loader masqué');
+            };
+            
+            // Si la requête a pris moins de 500ms, attendre un peu
+            if (elapsed < minDelay) {
+                setTimeout(hideLoader, minDelay - elapsed);
+            } else {
+                hideLoader();
+            }
+        }
+    
+    // Fonctions pour les achats
+    function displayPurchaseSelectedVehicles() {
+        const container = document.getElementById('purchaseSelectedVehiclesList');
+        container.innerHTML = '';
+        
+        if (purchaseSelectedVehicles.length === 0) {
+            container.innerHTML = '<p class="text-muted">Aucun véhicule sélectionné</p>';
+            return;
+        }
+        
+        purchaseSelectedVehicles.forEach((vehicle, index) => {
+            const vehicleDiv = document.createElement('div');
+            vehicleDiv.className = 'selected-vehicle-item mb-2 p-2 border rounded';
+            vehicleDiv.innerHTML = `
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <h6 class="mb-1">${vehicle.name}</h6>
+                        <small class="text-muted">${vehicle.price}€</small>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-outline-secondary" type="button" onclick="decreasePurchaseQuantity(${index})">-</button>
+                            <input type="number" class="form-control text-center" id="quantity-${index}" value="${vehicle.quantity || 1}" min="1" max="10" onchange="updatePurchaseQuantity(${index}, this.value)">
+                            <button class="btn btn-outline-secondary" type="button" onclick="increasePurchaseQuantity(${index})">+</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <button type="button" class="btn btn-sm btn-outline-danger me-1" onclick="removePurchaseVehicle(${index})">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="editPurchaseVehicle(${index})">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(vehicleDiv);
+        });
+        
+        updatePurchaseVehicleCount();
+    }
+    
+    // Fonction pour ajouter un véhicule à l'achat
+    function addPurchaseVehicle(vehicleId, vehicleName, vehiclePrice) {
+        // Vérifier si le véhicule existe déjà
+        const existingIndex = purchaseSelectedVehicles.findIndex(v => v.id === vehicleId);
+        
+        if (existingIndex !== -1) {
+            // Si on est en mode édition, remplacer le véhicule existant
+            if (editingPurchaseVehicleIndex !== null) {
+                purchaseSelectedVehicles[editingPurchaseVehicleIndex] = {
+                    id: vehicleId,
+                    name: vehicleName,
+                    price: parseFloat(vehiclePrice),
+                    quantity: 1
+                };
+                editingPurchaseVehicleIndex = null;
+            } else {
+                // Sinon, ne pas ajouter de doublon
+                console.log('Véhicule déjà sélectionné pour achat:', vehicleName);
+                return;
+            }
+        } else {
+            // Si on est en mode édition, remplacer le véhicule à l'index donné
+            if (editingPurchaseVehicleIndex !== null) {
+                purchaseSelectedVehicles[editingPurchaseVehicleIndex] = {
+                    id: vehicleId,
+                    name: vehicleName,
+                    price: parseFloat(vehiclePrice),
+                    quantity: 1
+                };
+                editingPurchaseVehicleIndex = null;
+            } else {
+                // Ajouter un nouveau véhicule
+                purchaseSelectedVehicles.push({
+                    id: vehicleId,
+                    name: vehicleName,
+                    price: parseFloat(vehiclePrice),
+                    quantity: 1
+                });
+            }
+        }
+        
+        displayPurchaseSelectedVehicles();
+    }
+    
+    // Fonction pour supprimer un véhicule d'achat
+    window.removePurchaseVehicle = function(index) {
+        purchaseSelectedVehicles.splice(index, 1);
+        displayPurchaseSelectedVehicles();
+    };
+    
+    // Fonction pour modifier un véhicule d'achat
+    window.editPurchaseVehicle = function(index) {
+        editingPurchaseVehicleIndex = index;
+        vehicleSelectionModal.show();
+    };
+    
+    // Fonction pour mettre à jour le compteur de véhicules d'achat
+    function updatePurchaseVehicleCount() {
+        document.getElementById('purchaseVehicleCount').textContent = purchaseSelectedVehicles.length;
+    }
+    
+    // Fonctions pour gérer les quantités d'achat
+    window.increasePurchaseQuantity = function(index) {
+        if (purchaseSelectedVehicles[index].quantity < 10) {
+            purchaseSelectedVehicles[index].quantity++;
+            displayPurchaseSelectedVehicles();
+        }
+    };
+    
+    window.decreasePurchaseQuantity = function(index) {
+        if (purchaseSelectedVehicles[index].quantity > 1) {
+            purchaseSelectedVehicles[index].quantity--;
+            displayPurchaseSelectedVehicles();
+        }
+    };
+    
+    window.updatePurchaseQuantity = function(index, value) {
+        const quantity = parseInt(value);
+        if (quantity >= 1 && quantity <= 10) {
+            purchaseSelectedVehicles[index].quantity = quantity;
+        } else {
+            // Restaurer la valeur précédente si invalide
+            displayPurchaseSelectedVehicles();
+        }
+    };
+    
+    function displaySelectedVehicles() {
+        const container = document.getElementById('selectedVehiclesList');
+        container.innerHTML = '';
+        
+        if (selectedVehicles.length === 0) {
+            container.innerHTML = '<p class="text-muted">Aucun véhicule sélectionné</p>';
+            return;
+        }
+        
+        selectedVehicles.forEach((vehicle, index) => {
+            const vehicleDiv = document.createElement('div');
+            vehicleDiv.className = 'selected-vehicle-item mb-2 p-2 border rounded';
+            vehicleDiv.innerHTML = `
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h6 class="mb-1">${vehicle.name}</h6>
+                        <small class="text-muted">${vehicle.price}€/jour</small>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <button type="button" class="btn btn-sm btn-outline-danger me-1" onclick="removeVehicle(${index})">Supprimer</button>
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="editVehicle(${index})">Modifier</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(vehicleDiv);
+        });
+        
+        calculateTotal();
+    }
+    
+    // Fonction pour ajouter un véhicule
+    function addVehicle(vehicleId, vehicleName, vehiclePrice) {
+        // Vérifier si le véhicule existe déjà
+        const existingIndex = selectedVehicles.findIndex(v => v.id === vehicleId);
+        
+        if (existingIndex !== -1) {
+            // Si on est en mode édition, remplacer le véhicule existant
+            if (editingVehicleIndex !== null) {
+                selectedVehicles[editingVehicleIndex] = {
+                    id: vehicleId,
+                    name: vehicleName,
+                    price: parseFloat(vehiclePrice)
+                };
+                editingVehicleIndex = null;
+            } else {
+                // Sinon, ne pas ajouter de doublon
+                console.log('Véhicule déjà sélectionné:', vehicleName);
+                return;
+            }
+        } else {
+            // Si on est en mode édition, remplacer le véhicule à l'index donné
+            if (editingVehicleIndex !== null) {
+                selectedVehicles[editingVehicleIndex] = {
+                    id: vehicleId,
+                    name: vehicleName,
+                    price: parseFloat(vehiclePrice)
+                };
+                editingVehicleIndex = null;
+            } else {
+                // Ajouter un nouveau véhicule
+                selectedVehicles.push({
+                    id: vehicleId,
+                    name: vehicleName,
+                    price: parseFloat(vehiclePrice)
+                });
+            }
+        }
+        
+        displaySelectedVehicles();
+    }
+    
+    // Fonction pour supprimer un véhicule
+    window.removeVehicle = function(index) {
+        selectedVehicles.splice(index, 1);
+        displaySelectedVehicles();
+    };
+    
+    // Fonction pour modifier un véhicule
+    window.editVehicle = function(index) {
+        editingVehicleIndex = index;
+        vehicleSelectionModal.show();
+    };
+    
+    // Fonction pour modifier un véhicule d'achat
+    window.editPurchaseVehicle = function(index) {
+        editingPurchaseVehicleIndex = index;
+        purchaseVehicleSelectionModal.show();
+    };
+    
+    // Gérer les clics sur les boutons "Book Ride"
+    document.querySelectorAll('.book-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const vehicleId = this.dataset.vehicleId;
+            const vehicleName = this.dataset.vehicleName;
+            const vehiclePrice = this.dataset.vehiclePrice;
+            
+            // Nettoyer les données précédentes
+            clearBookingData();
+            
+            // Ajouter le véhicule à la liste de réservation
+            addVehicle(vehicleId, vehicleName, vehiclePrice);
+            
+            // Ouvrir le modal de réservation
+            bookingModal.show();
+        });
+    });
+    
+    // Gérer les clics sur les boutons "Acheter"
+    document.querySelectorAll('.purchase-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const vehicleId = this.dataset.vehicleId;
+            const vehicleName = this.dataset.vehicleName;
+            const vehiclePrice = this.dataset.vehiclePrice;
+            
+            // Nettoyer les données précédentes
+            clearPurchaseData();
+            
+            // Ajouter le véhicule à la liste d'achat
+            addPurchaseVehicle(vehicleId, vehicleName, vehiclePrice);
+            
+            // Ouvrir le modal d'achat
+            purchaseModal.show();
+        });
+    });
+    
+    // Gérer le bouton "Ajouter un véhicule" pour les réservations
+    document.getElementById('addVehicleBtn').addEventListener('click', function() {
+        editingVehicleIndex = null;
+        vehicleSelectionModal.show();
+    });
+    
+    // Gérer le bouton "Ajouter un véhicule" pour l'achat
+    document.getElementById('addPurchaseVehicleBtn').addEventListener('click', function() {
+        editingPurchaseVehicleIndex = null;
+        purchaseVehicleSelectionModal.show();
+    });
+    
+    // Gérer la sélection d'un véhicule dans le modal de sélection pour réservation
+    document.querySelectorAll('.vehicle-selection-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const vehicleId = this.dataset.vehicleId;
+            const vehicleName = this.dataset.vehicleName;
+            const vehiclePrice = this.dataset.vehiclePrice;
+            
+            addVehicle(vehicleId, vehicleName, vehiclePrice);
+            vehicleSelectionModal.hide();
+            bookingModal.show();
+        });
+    });
+    
+    // Gérer la sélection d'un véhicule dans le modal de sélection pour achat
+    document.querySelectorAll('.purchase-vehicle-selection-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const vehicleId = this.dataset.vehicleId;
+            const vehicleName = this.dataset.vehicleName;
+            const vehiclePrice = this.dataset.vehiclePrice;
+            
+            addPurchaseVehicle(vehicleId, vehicleName, vehiclePrice);
+            purchaseVehicleSelectionModal.hide();
+            purchaseModal.show();
+        });
+    });
+    
+    // Nettoyer les données quand les modals se ferment
+    document.getElementById('bookingModal').addEventListener('hidden.bs.modal', function() {
+        clearBookingData();
+    });
+    
+    document.getElementById('purchaseModal').addEventListener('hidden.bs.modal', function() {
+        clearPurchaseData();
+    });
+    
+    // Gérer la confirmation d'achat
+    document.getElementById('confirmPurchase').addEventListener('click', function() {
+        const form = document.getElementById('purchaseForm');
+        const confirmBtn = this;
+        
+        // Validation basique
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+        
+        if (purchaseSelectedVehicles.length === 0) {
+            showNotification('Veuillez sélectionner au moins un véhicule.', 'error');
+            return;
+        }
+        
+        // Afficher le loader global
+        showGlobalLoader('Traitement de votre achat...');
+        confirmBtn.disabled = true;
+        
+        // Préparer les données
+        const formData = new FormData(form);
+        
+        // Ajouter les véhicules sélectionnés
+        purchaseSelectedVehicles.forEach((vehicle, index) => {
+            console.log(`Envoi véhicule achat ${index}:`, {
+                id: vehicle.id,
+                name: vehicle.name,
+                price: vehicle.price,
+                quantity: vehicle.quantity,
+                priceType: typeof vehicle.price
+            });
+            
+            formData.append(`vehicles[${index}][id]`, vehicle.id);
+            formData.append(`vehicles[${index}][name]`, vehicle.name);
+            formData.append(`vehicles[${index}][price]`, vehicle.price.toString());
+            formData.append(`vehicles[${index}][quantity]`, vehicle.quantity.toString());
+        });
+        
+        // Envoyer la requête
+        fetch('{% url "create_purchase" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showNotification('Achat confirmé ! Un email de confirmation a été envoyé.', 'success');
+                // Fermer le modal de manière plus robuste
+                const modalElement = document.getElementById('purchaseModal');
+                const modal = bootstrap.Modal.getInstance(modalElement);
+                if (modal) {
+                    modal.hide();
+                }
+                form.reset();
+                clearPurchaseData();
+            } else {
+                showNotification('Erreur: ' + data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Une erreur est survenue. Veuillez réessayer.', 'error');
+        })
+        .finally(() => {
+            // Masquer le loader et restaurer le bouton
+            hideGlobalLoader();
+            confirmBtn.disabled = false;
+        });
+    });
+    document.querySelectorAll('.book-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const vehicleId = this.dataset.vehicleId;
+            const vehicleName = this.dataset.vehicleName;
+            const vehiclePrice = this.dataset.vehiclePrice;
+            
+            // Ajouter le véhicule à la liste
+            addVehicle(vehicleId, vehicleName, vehiclePrice);
+            
+            // Ouvrir le modal
+            bookingModal.show();
+        });
+    });
+    
+    // Gérer le bouton "Ajouter un véhicule"
+    document.getElementById('addVehicleBtn').addEventListener('click', function() {
+        editingVehicleIndex = null;
+        vehicleSelectionModal.show();
+    });
+    
+    // Gérer la sélection d'un véhicule dans le modal de sélection
+    document.querySelectorAll('.vehicle-selection-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const vehicleId = this.dataset.vehicleId;
+            const vehicleName = this.dataset.vehicleName;
+            const vehiclePrice = this.dataset.vehiclePrice;
+            
+            addVehicle(vehicleId, vehicleName, vehiclePrice);
+            
+            // Fermer le modal de sélection et rouvrir le modal de réservation
+            vehicleSelectionModal.hide();
+            bookingModal.show();
+        });
+    });
+    
+        // Calculer le prix total
+        function calculateTotal() {
+            const pickupDate = document.getElementById('pickupDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+            
+            if (pickupDate && returnDate && selectedVehicles.length > 0) {
+                const pickup = new Date(pickupDate);
+                const returnD = new Date(returnDate);
+                const diffTime = Math.abs(returnD - pickup);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays > 0) {
+                    document.getElementById('duration').textContent = diffDays;
+                    document.getElementById('vehicleCount').textContent = selectedVehicles.length;
+                }
+            }
+        }
+    
+    // Écouter les changements de dates
+    document.getElementById('pickupDate').addEventListener('change', calculateTotal);
+    document.getElementById('returnDate').addEventListener('change', calculateTotal);
+    
+    // Gérer la confirmation de réservation
+    document.getElementById('confirmBooking').addEventListener('click', function() {
+        const form = document.getElementById('bookingForm');
+        const confirmBtn = this;
+        
+            // Validation basique
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            if (selectedVehicles.length === 0) {
+                showNotification('Veuillez sélectionner au moins un véhicule.', 'error');
+                return;
+            }
+            
+            // Afficher le loader global
+            showGlobalLoader('Traitement de votre réservation...');
+            confirmBtn.disabled = true;
+        
+        // Préparer les données
+        const formData = new FormData(form);
+        
+        // Ajouter les véhicules sélectionnés
+        selectedVehicles.forEach((vehicle, index) => {
+            console.log(`Envoi véhicule ${index}:`, {
+                id: vehicle.id,
+                name: vehicle.name,
+                price: vehicle.price,
+                priceType: typeof vehicle.price
+            });
+            
+            formData.append(`vehicles[${index}][id]`, vehicle.id);
+            formData.append(`vehicles[${index}][name]`, vehicle.name);
+            formData.append(`vehicles[${index}][price]`, vehicle.price.toString());
+        });
+        
+        // Envoyer la requête
+        fetch('{% url "create_booking" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('Réservation confirmée ! Un email de confirmation a été envoyé.', 'success');
+                    // Fermer le modal de manière plus robuste
+                    const modalElement = document.getElementById('bookingModal');
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+                    if (modal) {
+                        modal.hide();
+                    }
+                    form.reset();
+                    clearBookingData();
+                } else {
+                    showNotification('Erreur: ' + data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Une erreur est survenue. Veuillez réessayer.', 'error');
+            })
+            .finally(() => {
+                // Masquer le loader et restaurer le bouton
+                hideGlobalLoader();
+                confirmBtn.disabled = false;
+            });
+    });
+});
+
+window.onscroll = function() {myFunction()};
+
+var navbar_sticky = document.getElementById("navbar_sticky");
+var sticky = navbar_sticky.offsetTop;
+var navbar_height = document.querySelector('.navbar').offsetHeight;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky + navbar_height) {
+    navbar_sticky.classList.add("sticky")
+	document.body.style.paddingTop = navbar_height + 'px';
+  } else {
+    navbar_sticky.classList.remove("sticky");
+	document.body.style.paddingTop = '0'
+  }
+}
+</script>
+
+<style>
+.vehicle-selection-card, .purchase-vehicle-selection-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.vehicle-selection-card:hover, .purchase-vehicle-selection-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
+.selected-vehicle-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6 !important;
+    border-left: 4px solid #e67e22 !important;
+}
+
+.selected-vehicle-item:hover {
+    background-color: #e9ecef;
+}
+
+/* Styles spécifiques pour le modal d'achat */
+#purchaseModal .form-control {
+    pointer-events: auto !important;
+    cursor: text !important;
+}
+
+#purchaseModal .form-control:focus {
+    border-color: #80bdff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}
+
+#purchaseModal .btn {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+#purchaseModal input[type="number"] {
+    pointer-events: auto !important;
+    cursor: text !important;
+}
+
+/* Animations pour les notifications */
+.notification {
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    max-width: 350px;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.notification .close-btn {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.notification .close-btn:hover {
+    opacity: 1;
+}
+
+.notification .countdown {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+#selectedVehiclesList {
+    min-height: 50px;
+}
+
+.vehicle-count {
+    background-color: #e67e22;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Uniformiser la taille des images des véhicules */
+.model_pg1i1 img {
+    height: 250px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+}
+
+.vehicle-selection-card img, .purchase-vehicle-selection-card img {
+    height: 200px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+}
+
+/* Améliorer le loader */
+#globalLoader {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    background-color: rgba(0,0,0,0.8) !important;
+    display: none !important;
+}
+
+#globalLoader .card {
+    animation: fadeInScale 0.3s ease-out;
+    position: relative !important;
+    z-index: 10000 !important;
+    background-color: white !important;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+}
+
+#globalLoader .spinner-border {
+    border-color: #dc3545 !important;
+    border-right-color: transparent !important;
+    animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+</style>
+
+<script>
+// Variables globales pour le loader
+let loaderStartTime = null;
+
+// Fonction pour afficher le loader
+function showGlobalLoader(message = 'Traitement en cours...') {
+    const loader = document.getElementById('globalLoader');
+    const loaderMessage = document.getElementById('loaderMessage');
+    
+    if (loader && loaderMessage) {
+        loaderMessage.textContent = message;
+        loader.style.setProperty('display', 'flex', 'important');
+        loader.style.setProperty('visibility', 'visible', 'important');
+        loader.style.setProperty('opacity', '1', 'important');
+        loader.style.setProperty('z-index', '9999', 'important');
+        
+        document.body.style.pointerEvents = 'none';
+        document.body.style.userSelect = 'none';
+        
+        loaderStartTime = Date.now();
+        
+        console.log('Affichage du loader:', message);
+    }
+}
+
+// Fonction pour masquer le loader
+function hideGlobalLoader() {
+    const loader = document.getElementById('globalLoader');
+    
+    if (loader) {
+        const elapsed = loaderStartTime ? Date.now() - loaderStartTime : 0;
+        const minDelay = 500; 
+        
+        if (elapsed < minDelay) {
+            setTimeout(() => {
+                loader.style.setProperty('display', 'none', 'important');
+                loader.style.setProperty('visibility', 'hidden', 'important');
+                loader.style.setProperty('opacity', '0', 'important');
+                
+                document.body.style.pointerEvents = 'auto';
+                document.body.style.userSelect = 'auto';
+                
+                console.log('Loader masqué');
+            }, minDelay - elapsed);
+        } else {
+            loader.style.setProperty('display', 'none', 'important');
+            loader.style.setProperty('visibility', 'hidden', 'important');
+            loader.style.setProperty('opacity', '0', 'important');
+            
+            document.body.style.pointerEvents = 'auto';
+            document.body.style.userSelect = 'auto';
+            
+            console.log('Loader masqué');
+        }
+    }
+}
+
+// Fonction pour afficher une notification
+function showNotification(message, type = 'success') {
+    const container = document.getElementById('notificationContainer');
+    if (!container) return;
+    
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show`;
+    notification.style.cssText = 'margin-bottom: 10px; max-width: 400px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);';
+    
+    notification.innerHTML = `
+        <strong>${type === 'success' ? '✅ Succès' : '❌ Erreur'}</strong><br>
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    container.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 4000);
+}
+
+// Gestionnaire pour le formulaire de newsletter
+document.addEventListener('DOMContentLoaded', function() {
+    const submitNewsletter = document.getElementById('submitNewsletter');
+    const newsletterForm = document.getElementById('newsletterForm');
+    
+    if (submitNewsletter && newsletterForm) {
+        submitNewsletter.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('newsletterEmail');
+            if (!emailInput || !emailInput.value.trim()) {
+                showNotification('Veuillez entrer une adresse email valide.', 'error');
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value.trim())) {
+                showNotification('Veuillez entrer une adresse email valide.', 'error');
+                return;
+            }
+            
+            showGlobalLoader('Abonnement à la newsletter...');
+            
+            submitNewsletter.style.pointerEvents = 'none';
+            submitNewsletter.style.opacity = '0.6';
+            
+            const formData = new FormData();
+            formData.append('email', emailInput.value.trim());
+            formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+            
+            fetch('{% url "create_newsletter_subscription" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification(data.message, 'success');
+                    newsletterForm.reset();
+                } else {
+                    showNotification(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                showNotification('Une erreur est survenue. Veuillez réessayer.', 'error');
+            })
+            .finally(() => {
+                hideGlobalLoader();
+                submitNewsletter.style.pointerEvents = 'auto';
+                submitNewsletter.style.opacity = '1';
+            });
+        });
+    }
+});
+</script>
+
+</body>
+
+</html>
