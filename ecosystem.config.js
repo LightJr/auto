@@ -3,7 +3,7 @@ module.exports = {
     name: 'auto-republic-rdc',
     script: 'gunicorn',
     args: '--bind 127.0.0.1:6987 --workers 3 --timeout 120 --keep-alive 2 --max-requests 1000 --max-requests-jitter 100 car.wsgi:application',
-    cwd: '/var/www/car_rent',
+    cwd: '/var/www/auto',
     instances: 1,
     autorestart: true,
     watch: false,
@@ -11,12 +11,12 @@ module.exports = {
     env: {
       NODE_ENV: 'production',
       DJANGO_SETTINGS_MODULE: 'car.settings',
-      PYTHONPATH: '/var/www/car_rent',
+      PYTHONPATH: '/var/www/auto',
     },
     env_production: {
       NODE_ENV: 'production',
       DJANGO_SETTINGS_MODULE: 'car.settings',
-      PYTHONPATH: '/var/www/car_rent',
+      PYTHONPATH: '/var/www/auto',
     },
     error_file: './logs/err.log',
     out_file: './logs/out.log',

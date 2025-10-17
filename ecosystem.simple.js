@@ -3,7 +3,7 @@ module.exports = {
     name: 'auto-republic-rdc',
     script: 'gunicorn',
     args: '--bind 127.0.0.1:6987 --workers 3 --timeout 120 car.wsgi:application',
-    cwd: '/var/www/car_rent',
+    cwd: '/var/www/auto',
     instances: 1,
     autorestart: true,
     watch: false,

@@ -4,7 +4,7 @@
 
 # Configuration
 PROJECT_NAME="auto-republic-rdc"
-PROJECT_PATH="/var/www/car_rent"
+PROJECT_PATH="/var/www/auto"
 DOMAIN="votre-domaine.com"  # Remplacez par votre domaine
 NGINX_SITE="auto-republic-rdc"
 
