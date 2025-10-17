@@ -139,11 +139,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     'http://77.37.51.63',
     'https://77.37.51.63',
-    'http://77.37.51.63:6987',
-    'https://77.37.51.63:6987',
+    'http://77.37.51.63:6768',
+    'https://77.37.51.63:6768',
     'http://localhost',
     'http://127.0.0.1',
 ]
+
+# Configuration CORS pour éviter les erreurs Cross-Origin
+CORS_ALLOWED_ORIGINS = [
+    "http://77.37.51.63:6768",
+    "https://77.37.51.63:6768",
+    "http://localhost:6768",
+    "http://127.0.0.1:6768",
+]
+
+# Configuration de sécurité pour les headers
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+SECURE_REFERRER_POLICY = None
+
+# Configuration pour éviter les erreurs de contenu mixte
+SECURE_SSL_REDIRECT = False
+SECURE_PROXY_SSL_HEADER = None
 
 # Configuration du logging
 LOGGING = {

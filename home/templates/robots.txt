@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: http://77.37.51.63:6768/sitemap.xml
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
+
+# Pages importantes
+Allow: /about/
+Allow: /models/
+Allow: /contact/
+Allow: /garage/
+
+# Fichiers statiques
+Allow: /static/
+Allow: /media/
+
+# Interdire l'accès aux fichiers sensibles
+Disallow: /admin/
+Disallow: /logs/
+Disallow: /*.log$
+Disallow: /__pycache__/
+Disallow: /.env/
+Disallow: /migrations/
+Disallow: /venv/
+Disallow: /.git/
