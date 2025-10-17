@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-o&6u^!x#sa(5u!0ti!nti)6+of&j8m$d!j9b746c-7%#bu4mq@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '77.37.51.63',  # Votre IP VPS
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -115,15 +119,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATICFILES_DIRS = [
     BASE_DIR / 'home' / 'static',
 ]
+
+# Configuration des fichiers média
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuration CSRF pour votre IP
+CSRF_TRUSTED_ORIGINS = [
+    'http://77.37.51.63',
+    'https://77.37.51.63',
+    'http://77.37.51.63:6987',
+    'https://77.37.51.63:6987',
+    'http://localhost',
+    'http://127.0.0.1',
+]
 
 # Configuration du logging
 LOGGING = {
